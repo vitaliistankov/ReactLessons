@@ -1,25 +1,28 @@
 import React from "react";
-import Form from './app/views/Form';
-import PrintArray from "./app/views/PrintArray";
+import ShowUsers from './app/views/ShowUsers';
 
 class App extends React.Component 
 {
   state = {
-    isOpenFormTab: false
+    users: [
+      {id: 1, name: 'Gosho'},
+      {id: 2, name: "Pesho"},
+      {id: 3, name: "Tosho"}
+    ],
+    age: 25
+  }
+
+  incrementAge() {
+    this.setState({age: this.setState.age + 1})
   }
   
   render() {
     return (<div>
-      <div>
-        <button onClick={()=>{
-          let ioft = !this.state.isOpenFormTab;
-          this.setState({isOpenFormTab: ioft});
-        }} >
-          {this.state.isOpenFormTab === true ? 'Close' : 'Open'}
-        </button>
-      </div>
-      {this.state.isOpenFormTab && <Form />}
-      <PrintArray />
+      <ShowUsers 
+        users={this.state.users} 
+        age={this.state.age}
+        incrementAge={this.incrementAge.bind(this)}
+      />
     </div>)
   }
 }
